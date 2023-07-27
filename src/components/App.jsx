@@ -1,16 +1,23 @@
-export const App = () => {
+import { Container, Ul } from './App.styled';
+import Title from './Title/Title';
+import Form from './Form/Form';
+import Contact from './Contacts/Contacts';
+import Filter from './Filter/Filter';
+import { Toaster } from 'react-hot-toast';
+
+const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Container>
+      <Title text="Phonebook"></Title>
+      <Form />
+      <Title text="Contacts"></Title>
+      <Filter />
+      <Ul>
+        <Contact />
+      </Ul>
+      <Toaster/>
+    </Container>
   );
 };
+
+export default App;
