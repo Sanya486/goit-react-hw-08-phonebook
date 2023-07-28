@@ -10,7 +10,7 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
-export const addContactSlice = createSlice({
+export const contactSlice = createSlice({
   name: 'contacts',
   initialState: {
     items: [],
@@ -34,21 +34,9 @@ export const addContactSlice = createSlice({
     [deleteContact.rejected]: handleRejected,
     [addContact.pending]: handlePending,
     [addContact.fulfilled]: (state, action) => {
-      state.items.unshift(action.payload)
+      state.items.unshift(action.payload);
       state.isLoading = false;
     },
     [addContact.rejected]: handleRejected,
-  },
-});
-
-export const filterSlice = createSlice({
-  name: 'filter',
-  initialState: {
-    value: '',
-  },
-  reducers: {
-    filter: (state, action) => {
-      state.value = action.payload;
-    },
   },
 });

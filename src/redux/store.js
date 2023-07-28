@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { addContactSlice, filterSlice } from './slices';
+import { contactSlice } from './slices';
+import { filterSlice } from './signupSlice';
+import { authSlice } from './authSlice';
 
 export const store = configureStore({
   reducer: {
-    contacts: addContactSlice.reducer,
+    auth: authSlice.reducer,
+    contacts: contactSlice.reducer,
     filter: filterSlice.reducer,
   },
   // middleware: getDefaultMiddleware =>
@@ -14,6 +17,5 @@ export const store = configureStore({
   //     },
   //   }),
 });
-
 
 export const { filter } = filterSlice.actions;

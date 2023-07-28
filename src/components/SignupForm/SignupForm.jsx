@@ -1,10 +1,32 @@
-import { Formik, Form } from 'formik';
+import { Formik, Form, useField } from 'formik';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import { Typography, Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchSignup } from 'redux/operations';
+
+ const MyTextField = ({ labelFormik, ...props }) => {
+   const [field, meta] = useField(props);
+   return (
+     <>
+       <label>
+         {labelFormik}
+         <TextField {...field} {...props} />
+       </label>
+       {meta.touched && meta.error ? (
+         <div className="error">{meta.error}</div>
+       ) : null}
+     </>
+   );
+ };
 
 const SignupForm = () => {
+  const dispatch = useDispatch() 
+  const handleSubmit = (values) => {
+    dispatch(fetchSignup(values));
+  
+  }
   return (
     <Container>
       <Typography
@@ -16,18 +38,15 @@ const SignupForm = () => {
         Register to Phonemania
       </Typography>
       <Typography align="center" variant="p" display="block" mb="20px">
-        Already have an account? <Link to='/login'>Log in here</Link>
+        Already have an account? <Link to="/login">Log in here</Link>
       </Typography>
       <Formik
         initialValues={{
-          firstName: '',
-          lastName: '',
+          name: '',
           email: '',
+          password: '',
         }}
-        onSubmit={async values => {
-          await new Promise(r => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
-        }}
+        onSubmit={handleSubmit}
       >
         <Form>
           <Box
@@ -44,7 +63,7 @@ const SignupForm = () => {
               boxShadow: ' 10px 10px 24px -7px rgba(0,0,0,0.75)',
             }}
           >
-            <TextField
+            <MyTextField
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Name"
@@ -52,7 +71,7 @@ const SignupForm = () => {
               name="name"
               type="text"
             />
-            <TextField
+            <MyTextField
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Email"
@@ -60,7 +79,7 @@ const SignupForm = () => {
               name="email"
               type="email"
             />
-            <TextField
+            <MyTextField
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Password"

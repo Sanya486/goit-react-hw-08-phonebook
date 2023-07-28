@@ -3,7 +3,67 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Loading } from 'notiflix';
 import { toast } from 'react-hot-toast';
 
-axios.defaults.baseURL = 'https://64beb5f65ee688b6250cd534.mockapi.io/api';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
+const setAuthorization = token => {
+  axios.defaults.headers.common.Authorization = token;
+};
+console.log(axios.defaults.headers.common.Authorization);
+
+const clearAuthorization = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
+export const fetchSignup = createAsyncThunk(
+  'users/signup',
+  async (user, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/signup', user);
+      setAuthorization(response.data.token);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchLogin = createAsyncThunk(
+  'users/login',
+  async (user, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/login', user);
+      setAuthorization(response.data.token);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchLogout = createAsyncThunk(
+  'users/logout',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/logout');
+      clearAuthorization();
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchRefresh = createAsyncThunk(
+  'users/current',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/current');
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
