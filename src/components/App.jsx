@@ -4,16 +4,41 @@ import Home from 'pages/Home';
 import Registration from 'pages/Registration';
 import Login from 'pages/Login';
 import Contacts from 'pages/Contacts';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchRefresh } from 'redux/operations';
+import RestrictedRoute from './Routes/RestrictedRoute';
+import PrivateRoute from './Routes/PrivateRoute';
 
 const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchRefresh());
+  }, [dispatch]);
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />}></Route>
-          <Route path="/registration" element={<Registration />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/contacts" element={<Contacts />}></Route>
+          <Route index element={<Home />} />
+          <Route
+            path="/registration"
+            element={
+              <RestrictedRoute
+                component={Registration}
+                redirectTo="/contacts"
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute component={Login} redirectTo="/contacts" />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute component={Contacts} redirectTo="/login" />}
+          />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

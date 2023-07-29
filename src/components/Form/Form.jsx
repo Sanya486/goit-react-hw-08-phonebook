@@ -18,7 +18,7 @@ const Form = () => {
       contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
     );
     if (!isContactExist) {
-      dispatch(addContact({ name, phone: number }));
+      dispatch(addContact({ name, number }));
       setName('');
       setNumber('');
     } else {

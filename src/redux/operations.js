@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Loading } from 'notiflix';
 import { toast } from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const setAuthorization = token => {
-  axios.defaults.headers.common.Authorization = token;
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-console.log(axios.defaults.headers.common.Authorization);
 
 const clearAuthorization = () => {
   axios.defaults.headers.common.Authorization = '';
@@ -32,7 +30,9 @@ export const fetchLogin = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const response = await axios.post('/users/login', user);
+      console.log(response)
       setAuthorization(response.data.token);
+      console.log(axios.defaults.headers.common.Authorization);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -56,8 +56,13 @@ export const fetchLogout = createAsyncThunk(
 export const fetchRefresh = createAsyncThunk(
   'users/current',
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState()
+    if (!state.auth.token) {
+      return state
+    }
+    setAuthorization(state.auth.token);
     try {
-      const response = await axios.post('/users/current');
+      const response = await axios.get('/users/current');
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -69,12 +74,12 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      Loading.pulse();
+  
       const response = await axios.get('/contacts');
-      Loading.remove();
+      
       return response.data;
     } catch (e) {
-      Loading.remove();
+     
       return thunkAPI.rejectWithValue(e.message);
     }
   }

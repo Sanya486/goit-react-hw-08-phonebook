@@ -11,15 +11,24 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import { NavLinkSt, LinkSt } from './AppBar.styled';
 
-import { NavLinkSt } from './AppBar.styled';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLogout } from 'redux/operations';
+import { selectIsLoggedIn, selectUserName } from 'redux/selectors';
 
 const pages = ['home', 'contacts'];
-const settings = ['Logout'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUserName);
+
+  const dispatch = useDispatch()
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -39,27 +48,52 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <ContactPhoneIcon
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            PhoneMania
-          </Typography>
+        <Toolbar
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+          disableGutters
+        >
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '100px' }}>
+            <LinkSt to="/">
+              <Box
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  gap: '10px',
+                  alignItems: 'center',
+                }}
+              >
+                <ContactPhoneIcon
+                  sx={{ display: { xs: 'none', md: 'flex' } }}
+                />
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  sx={{
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.1rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                  }}
+                >
+                  PhoneMania
+                </Typography>
+              </Box>
+            </LinkSt>
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <NavLinkSt to="/">Home</NavLinkSt>
+              {isLoggedIn && <NavLinkSt to="/contacts">Contacts</NavLinkSt>}
+            </Box>
+          </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -88,15 +122,20 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key="home" onClick={handleCloseNavMenu}>
+                <NavLinkSt style={{ color: '#1976d2' }} to="/">
+                  Home
+                </NavLinkSt>
+              </MenuItem>
+              <MenuItem key="home" onClick={handleCloseNavMenu}>
+                <NavLinkSt style={{ color: '#1976d2' }} to="/contacts">
+                  Contacts
+                </NavLinkSt>
+              </MenuItem>
             </Menu>
           </Box>
           <ContactPhoneIcon
-            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+            sx={{ display: { xs: 'none', md: 'none' }, mr: 1 }}
           />
           <Typography
             variant="h5"
@@ -106,7 +145,7 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
+
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.1rem',
@@ -118,59 +157,63 @@ function ResponsiveAppBar() {
           </Typography>
           <Box
             sx={{
-              flexGrow: 1,
               display: { xs: 'none', md: 'flex' },
               justifyContent: 'center',
               gap: '10px',
             }}
-          >
-            <NavLinkSt to="/">Home</NavLinkSt>
-            <NavLinkSt to="/contacts">Contacts</NavLinkSt>
-          </Box>
+          ></Box>
           <Box
             sx={{
-              flexGrow: 1,
-              display: { xs: 'none', md: 'flex' },
-              justifyContent: 'center',
+              display: { xs: 'flex', md: 'flex' },
+              justifyContent: 'flex-end',
               gap: '10px',
             }}
           >
-            <NavLinkSt to="/registration">Sign up</NavLinkSt>
-            <NavLinkSt to="/login">Login</NavLinkSt>
-        
+            {!isLoggedIn && (
+              <>
+                <NavLinkSt to="/registration">Sign up</NavLinkSt>
+                <NavLinkSt to="/login">Login</NavLinkSt>
+              </>
+            )}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings" arrow>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Typography textAlign="center">Hello, user</Typography>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <InsertEmoticonIcon sx={{ fontSize: 30 }} />
-                </IconButton>
-              </Box>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '5px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+          {isLoggedIn && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings" arrow onClick={handleOpenUserMenu}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <Typography textAlign="center">Hello, {user}</Typography>
+                  <IconButton sx={{ p: 0 }}>
+                    <InsertEmoticonIcon sx={{ fontSize: 30 }} />
+                  </IconButton>
+                </Box>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '5px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem
+                  key="Logout"
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    dispatch(fetchLogout());
+                  }}
+                >
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

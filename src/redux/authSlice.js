@@ -24,6 +24,7 @@ export const authSlice = createSlice({
     [fetchSignup.pending]: handlePending,
     [fetchSignup.fulfilled]: (state, action) => {
       state.token = action.payload.token;
+      state.user = action.payload.user;
       state.isLoggedIn = true;
       state.isLoading = false;
       state.isRefreshing = true;
@@ -32,6 +33,7 @@ export const authSlice = createSlice({
     [fetchLogin.pending]: handlePending,
     [fetchLogin.fulfilled]: (state, action) => {
       state.token = action.payload.token;
+      state.user = action.payload.user;
       state.isLoggedIn = true;
       state.isLoading = false;
       state.isRefreshing = true;
@@ -44,10 +46,19 @@ export const authSlice = createSlice({
       state.isRefreshing = false;
     },
     [fetchLogout.rejected]: handleRejected,
-    [fetchRefresh.pending]: handlePending,
-      [fetchRefresh.fulfilled]: (state, action) => {
-          state.user = action.payload
-           state.isLoading = false;
+    [fetchRefresh.pending]: (state) => {
+      state.isLoading = true;
+      state.isRefreshing = true
     },
+    [fetchRefresh.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      state.isLoading = false;
+      state.isLoggedIn = true
+      state.isRefreshing = false;
+    },
+    [fetchRefresh.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isRefreshing = false;
+    }
   },
 });
