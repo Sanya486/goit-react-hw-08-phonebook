@@ -1,10 +1,11 @@
 import React from 'react';
+import { TextField } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
 import { filter } from 'redux/store';
 
-import { Lable, Input } from './Filter.styled';
+
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,15 @@ const Filter = () => {
   };
   return (
     <div>
-      <Lable style={{ width: 200 }}>
-        Find contacts by name
-        <Input type="text" value={filterRedux} onChange={onFilterChange} />
-      </Lable>
+      <TextField
+        sx={{ width: '300px' }}
+        variant="outlined"
+        id="outlined-basic"
+        label="Find the contact"
+        type="text"
+        value={filterRedux}
+        onChange={onFilterChange}
+      />
     </div>
   );
 };

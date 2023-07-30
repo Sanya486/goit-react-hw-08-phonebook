@@ -14,6 +14,7 @@ const Contacts = () => {
   const filterRedux = useSelector(selectFilter);
   const contacts = filterRedux === '' ? contactsRedux : onActiveFilter();
 
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -27,7 +28,7 @@ const Contacts = () => {
 
   return (
     <>
-      {contacts.map(contact => 
+      {contacts.map((contact, index) => 
         <Contact key={contact.id} contact={contact} />
       )}
     </>

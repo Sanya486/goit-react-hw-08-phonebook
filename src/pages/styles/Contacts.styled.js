@@ -9,6 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Ul = styled.ul`
+width: 500px;
   padding: 0;
   display: flex;
   flex-direction: column;

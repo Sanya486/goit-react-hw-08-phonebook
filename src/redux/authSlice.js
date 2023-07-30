@@ -4,6 +4,7 @@ import { fetchSignup, fetchLogin, fetchLogout, fetchRefresh } from './operations
 
 const handlePending = state => {
   state.isLoading = true;
+  state.error = null
 };
 
 const handleRejected = (state, action) => {
@@ -46,19 +47,19 @@ export const authSlice = createSlice({
       state.isRefreshing = false;
     },
     [fetchLogout.rejected]: handleRejected,
-    [fetchRefresh.pending]: (state) => {
+    [fetchRefresh.pending]: state => {
       state.isLoading = true;
-      state.isRefreshing = true
+      state.isRefreshing = true;
     },
     [fetchRefresh.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
-      state.isLoggedIn = true
+      state.isLoggedIn = true;
       state.isRefreshing = false;
     },
     [fetchRefresh.rejected]: (state, action) => {
       state.isLoading = false;
       state.isRefreshing = false;
-    }
+    },
   },
 });

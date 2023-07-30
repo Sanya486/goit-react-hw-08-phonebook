@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { fetchRefresh } from 'redux/operations';
 import RestrictedRoute from './Routes/RestrictedRoute';
 import PrivateRoute from './Routes/PrivateRoute';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Toaster />
     </>
   );
 };

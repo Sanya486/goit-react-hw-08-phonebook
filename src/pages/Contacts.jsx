@@ -1,24 +1,36 @@
-import React from 'react'
-import { Container, Ul } from 'components/App.styled';
-import Title from 'components/Title/Title';
-import Form from 'components/Form/Form';
+import React from 'react';
+
+import AddContactForm from 'components/Form/Form';
 import Contact from 'components/Contacts/Contacts';
 import Filter from 'components/Filter/Filter';
 import { Toaster } from 'react-hot-toast';
+import {Container } from '@mui/material';
+import { Ul } from './styles/Contacts.styled';
 
 const Contacts = () => {
   return (
-     <Container>
-      <Title text="Phonebook"></Title>
-      <Form />
-      <Title text="Contacts"></Title>
+    <Container
+      sx={{
+        margin: '20px auto 0',
+       
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '10px',
+        border: ' 2px solid #1976d23c',
+        borderRadius: '22px 22px 22px 22px',
+        boxShadow: ' 10px 10px 24px -7px rgba(0,0,0,0.75)',
+      }}
+    >
+      <AddContactForm />
       <Filter />
       <Ul>
         <Contact />
       </Ul>
-      <Toaster/>
+      <Toaster />
     </Container>
-  )
-}
+  );
+};
 
-export default Contacts
+export default Contacts;

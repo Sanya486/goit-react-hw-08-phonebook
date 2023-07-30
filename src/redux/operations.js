@@ -30,9 +30,9 @@ export const fetchLogin = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const response = await axios.post('/users/login', user);
-      console.log(response)
       setAuthorization(response.data.token);
-      console.log(axios.defaults.headers.common.Authorization);
+      const userName = response.data.user.name
+      toast.success(`Welcone back, ${userName}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -85,6 +85,7 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
+
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
@@ -102,6 +103,26 @@ export const addContact = createAsyncThunk(
     }
   }
 );
+
+export const editContact = createAsyncThunk(
+  'contacts/editContact',
+  async (contact, thunkAPI) => {
+    try {
+      const name = contact.name
+      const number = contact.number
+      const toastPromise = axios.patch(`/contacts/${contact.id}`, {name, number});
+      const response = await toastPromise;
+      toast.promise(toastPromise, {
+        loading: 'Loading',
+        success: `${response.data.name} was eddited.`,
+        error: `Something went wrong. Please try more later!`,
+      });
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+)
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',

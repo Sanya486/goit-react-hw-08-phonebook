@@ -17,10 +17,7 @@ import { NavLinkSt, LinkSt } from './AppBar.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogout } from 'redux/operations';
 import { selectIsLoggedIn, selectUserName } from 'redux/selectors';
-
-const pages = ['home', 'contacts'];
-
-
+ 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

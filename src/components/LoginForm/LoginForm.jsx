@@ -3,8 +3,9 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import { Typography, Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin } from 'redux/operations';
+import { selectAuthError } from 'redux/selectors';
 
  const MyTextField = ({ labelFormik, ...props }) => {
    const [field, meta] = useField(props);
@@ -25,8 +26,9 @@ const LoginForm = () => {
   const dispatch = useDispatch()
   const handleSubmit = (values) => {
     dispatch(fetchLogin(values));
-  
   }
+
+  const isError = useSelector(selectAuthError)
   return (
     <Container>
       <Typography
@@ -79,6 +81,11 @@ const LoginForm = () => {
               name="password"
               type="password"
             />
+            {isError && (
+              <Typography color="red">
+                The email address or password is incorrect.
+              </Typography>
+            )}
             <Button
               sx={{ mt: '20px', mx: 'auto', display: 'block' }}
               variant="contained"
