@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/goit-react-hw-08-phonebook/static/css/main.33ae26e6.css",
-    "main.js": "/goit-react-hw-08-phonebook/static/js/main.67edd46e.js",
+    "main.css": "/goit-react-hw-08-phonebook/static/css/main.e49daaee.css",
+    "main.js": "/goit-react-hw-08-phonebook/static/js/main.2c462f36.js",
     "static/media/roboto-latin-500-normal.woff2": "/goit-react-hw-08-phonebook/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/goit-react-hw-08-phonebook/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
     "static/media/roboto-latin-400-normal.woff2": "/goit-react-hw-08-phonebook/static/media/roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2",
@@ -59,11 +59,11 @@
     "static/media/roboto-greek-ext-400-normal.woff": "/goit-react-hw-08-phonebook/static/media/roboto-greek-ext-400-normal.f708607d2a7290fb8bfa.woff",
     "static/media/roboto-greek-ext-700-normal.woff": "/goit-react-hw-08-phonebook/static/media/roboto-greek-ext-700-normal.249853776d22a271b2b5.woff",
     "index.html": "/goit-react-hw-08-phonebook/index.html",
-    "main.33ae26e6.css.map": "/goit-react-hw-08-phonebook/static/css/main.33ae26e6.css.map",
-    "main.67edd46e.js.map": "/goit-react-hw-08-phonebook/static/js/main.67edd46e.js.map"
+    "main.e49daaee.css.map": "/goit-react-hw-08-phonebook/static/css/main.e49daaee.css.map",
+    "main.2c462f36.js.map": "/goit-react-hw-08-phonebook/static/js/main.2c462f36.js.map"
   },
   "entrypoints": [
-    "static/css/main.33ae26e6.css",
-    "static/js/main.67edd46e.js"
+    "static/css/main.e49daaee.css",
+    "static/js/main.2c462f36.js"
   ]
 }
