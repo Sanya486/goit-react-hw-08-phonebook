@@ -2,11 +2,8 @@ import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContacts, selectFilter } from 'redux/selectors';
-import {
-  fetchContacts,
-} from 'redux/operations';
-import Contact from 'components/Contact/Contact'
-
+import { fetchContacts } from 'redux/operations';
+import Contact from 'components/Contact/Contact';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -14,12 +11,10 @@ const Contacts = () => {
   const filterRedux = useSelector(selectFilter);
   const contacts = filterRedux === '' ? contactsRedux : onActiveFilter();
 
-
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
- 
   function onActiveFilter() {
     return contactsRedux.filter(contact =>
       contact.name.toLowerCase().includes(filterRedux)
@@ -28,9 +23,9 @@ const Contacts = () => {
 
   return (
     <>
-      {contacts.map((contact, index) => 
+      {contacts.map(contact => (
         <Contact key={contact.id} contact={contact} />
-      )}
+      ))}
     </>
   );
 };

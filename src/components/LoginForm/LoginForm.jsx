@@ -66,6 +66,7 @@ const LoginForm = () => {
             }}
           >
             <MyTextField
+              autoComplete
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Email"
@@ -74,6 +75,7 @@ const LoginForm = () => {
               type="email"
             />
             <MyTextField
+              autoComplete
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Password"

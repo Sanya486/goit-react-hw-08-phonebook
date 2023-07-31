@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUserName } from 'redux/selectors';
-import Fade from 'react-reveal/Fade'; 
 
 const WelcomeCard = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -27,13 +26,13 @@ const WelcomeCard = () => {
               boxShadow: ' 10px 10px 24px -7px rgba(0,0,0,0.75)',
             }}
           >
-            <Fade top >
+         
                 <Title variant="h4" align="center" color={'#1976d2'}>
                   Hello! Welcome to PhoneMania
                 </Title>
-            </Fade>
+          
                       <Box sx={{ display: 'flex', flexDirection:{xs: 'column', md: 'row'}, alignItems: 'center', gap: '10px' }}>
-              <Fade left>
+        
                   <Box sx={{height: '563px'}}>
                       <img
                         style={{ display: 'block', height:'100%', width: '100%', objectFit: 'cover'  }}
@@ -41,8 +40,8 @@ const WelcomeCard = () => {
                         alt="robot"
                       />
                   </Box>
-              </Fade>
-                <Fade right cascade>
+           
+     
                     <List
                       sx={{
                                       padding: 0,
@@ -111,7 +110,7 @@ const WelcomeCard = () => {
                         </ListText>
                       </ListItemSt>
                     </List>
-                </Fade>
+
               
             </Box>
           </Box>

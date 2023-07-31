@@ -10,7 +10,6 @@ import { toast } from 'react-hot-toast';
 
 const MyTextField = ({ labelFormik, ...props }) => {
   const [field, meta] = useField(props);
-  console.log(meta);
   return (
     <>
       <label>
@@ -97,8 +96,8 @@ const AddContactForm = () => {
             borderRadius: '22px 22px 22px 22px',
           }}
         >
-          <MyTextField label="Email" name="name" type="text" />
-          <MyTextField label="Password" name="number" type="text" />
+          <MyTextField label="Name" name="name" type="text" />
+          <MyTextField label="Number" name="number" type="text" />
           <Button
             sx={{ mt: '20px', mx: 'auto', display: 'block' }}
             variant="contained"

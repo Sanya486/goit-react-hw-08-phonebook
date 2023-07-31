@@ -17,6 +17,7 @@ import { NavLinkSt, LinkSt } from './AppBar.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogout } from 'redux/operations';
 import { selectIsLoggedIn, selectUserName } from 'redux/selectors';
+import { Button } from '@mui/material';
  
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -64,7 +65,7 @@ function ResponsiveAppBar() {
                 <Typography
                   variant="h6"
                   noWrap
-                  component="a"
+                  component="p"
                   sx={{
                     display: { xs: 'none', md: 'flex' },
                     fontFamily: 'monospace',
@@ -85,8 +86,18 @@ function ResponsiveAppBar() {
                 gap: '10px',
               }}
             >
-              <NavLinkSt to="/">Home</NavLinkSt>
-              {isLoggedIn && <NavLinkSt to="/contacts">Contacts</NavLinkSt>}
+              <NavLinkSt to="/">
+                <Button variant="contained" component="p">
+                  Home
+                </Button>
+              </NavLinkSt>
+              {isLoggedIn && (
+                <NavLinkSt to="/contacts">
+                  <Button variant="contained" component="p">
+                    Contacts
+                  </Button>
+                </NavLinkSt>
+              )}
             </Box>
           </Box>
 
@@ -121,12 +132,16 @@ function ResponsiveAppBar() {
             >
               <MenuItem key="home" onClick={handleCloseNavMenu}>
                 <NavLinkSt style={{ color: '#1976d2' }} to="/">
-                  Home
+                  <Button variant="outlined" component="span">
+                    Home
+                  </Button>
                 </NavLinkSt>
               </MenuItem>
-              <MenuItem key="home" onClick={handleCloseNavMenu}>
+              <MenuItem key="Contacts" onClick={handleCloseNavMenu}>
                 <NavLinkSt style={{ color: '#1976d2' }} to="/contacts">
-                  Contacts
+                  <Button variant="outlined" component="span">
+                    Contacts
+                  </Button>
                 </NavLinkSt>
               </MenuItem>
             </Menu>
@@ -168,8 +183,20 @@ function ResponsiveAppBar() {
           >
             {!isLoggedIn && (
               <>
-                <NavLinkSt to="/registration">Sign up</NavLinkSt>
-                <NavLinkSt to="/login">Login</NavLinkSt>
+                <NavLinkSt to="/registration">
+                  <Button variant="contained" component="span">
+                    Sign up
+                  </Button>
+                </NavLinkSt>
+                <NavLinkSt to="/login">
+                  <Button
+                    sx={{ backgroundColor: 'white', color: '#1976d2' }}
+                    variant="contained"
+                    component="span"
+                  >
+                    Log in
+                  </Button>
+                </NavLinkSt>
               </>
             )}
           </Box>
@@ -206,7 +233,11 @@ function ResponsiveAppBar() {
                     dispatch(fetchLogout());
                   }}
                 >
-                  <Typography textAlign="center">Logout</Typography>
+                  <Typography textAlign="center">
+                    <Button variant="outlined" component="span">
+                      Log out
+                    </Button>
+                  </Typography>
                 </MenuItem>
               </Menu>
             </Box>

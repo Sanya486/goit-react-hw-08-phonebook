@@ -5,14 +5,15 @@ import Contact from 'components/Contacts/Contacts';
 import Filter from 'components/Filter/Filter';
 import { Toaster } from 'react-hot-toast';
 import {Container } from '@mui/material';
-import { Ul } from './styles/Contacts.styled';
+import { DivSt } from './styles/Contacts.styled';
+
 
 const Contacts = () => {
   return (
     <Container
       sx={{
         margin: '20px auto 0',
-       
+
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
@@ -25,9 +26,11 @@ const Contacts = () => {
     >
       <AddContactForm />
       <Filter />
-      <Ul>
+
+      <DivSt>
         <Contact />
-      </Ul>
+      </DivSt>
+
       <Toaster />
     </Container>
   );

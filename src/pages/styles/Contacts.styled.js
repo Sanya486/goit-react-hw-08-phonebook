@@ -8,10 +8,10 @@ export const Container = styled.div`
   box-shadow: 10px 10px 17px 6px rgba(0, 0, 0, 0.75);
 `;
 
-export const Ul = styled.ul`
+export const DivSt = styled.div`
 width: 500px;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 `;
