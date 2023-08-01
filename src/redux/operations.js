@@ -32,7 +32,7 @@ export const fetchLogin = createAsyncThunk(
       const response = await axios.post('/users/login', user);
       setAuthorization(response.data.token);
       const userName = response.data.user.name
-      toast.success(`Welcone back, ${userName}`);
+      toast.success(`Welcome back, ${userName}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
