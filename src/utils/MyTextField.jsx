@@ -14,9 +14,6 @@ export const MyTextField = ({ labelFormik, ...props }) => {
       <label>
         {labelFormik}
         <TextField
-          sx={{ width: '300px' }}
-          variant="outlined"
-          id="outlined-basic"
           {...field}
           {...props}
         />
@@ -43,9 +40,6 @@ export const MyEdittingTextField = ({ labelFormik, ...props }) => {
         <label>
           {labelFormik}
           <TextField
-            sx={{ width: '300px' }}
-            variant="outlined"
-            id="outlined-basic"
             {...field}
             {...props}
           />

@@ -18,7 +18,6 @@ const Filter = () => {
   return (
     <div>
       <TextField
-        sx={{ width: '300px' }}
         variant="outlined"
         id="outlined-basic"
         label="Find the contact"

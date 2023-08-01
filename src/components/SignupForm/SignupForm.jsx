@@ -36,7 +36,7 @@ const SignupForm = () => {
           <Box
             sx={{
               margin: '0 auto',
-              width: '400px',
+              maxWidth: '400px',
               padding: '40px',
               display: 'flex',
               flexDirection: 'column',
@@ -49,7 +49,6 @@ const SignupForm = () => {
           >
             <MyTextField
               required
-              sx={{ width: '300px' }}
               id="outlined-basic"
               label="Name"
               variant="outlined"
@@ -58,7 +57,6 @@ const SignupForm = () => {
             />
             <MyTextField
               required
-              sx={{ width: '300px' }}
               id="outlined-basic"
               label="Email"
               variant="outlined"
@@ -67,7 +65,6 @@ const SignupForm = () => {
             />
             <MyTextField
               required
-              sx={{ width: '300px' }}
               id="outlined-basic"
               label="Password"
               variant="outlined"

@@ -46,7 +46,7 @@ const AddContactForm = () => {
         <Box
           sx={{
             margin: '0 auto',
-            width: '500px',
+            maxWidth: '500px',
             padding: '40px',
             display: 'flex',
             flexDirection: 'column',

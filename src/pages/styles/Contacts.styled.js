@@ -9,7 +9,8 @@ export const Container = styled.div`
 `;
 
 export const DivSt = styled.div`
-width: 500px;
+max-width: 500px;
+width:100%;
   padding: 0;
   display: flex;
   flex-direction: column;

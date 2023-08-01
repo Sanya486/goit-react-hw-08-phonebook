@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AddContactForm from 'components/Form/Form';
+import AddContactForm from 'components/AddContactForm/AddContactForm';
 import Contact from 'components/Contacts/Contacts';
 import Filter from 'components/Filter/Filter';
 import { Toaster } from 'react-hot-toast';

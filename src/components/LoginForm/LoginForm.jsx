@@ -51,8 +51,8 @@ const LoginForm = () => {
         <Form>
           <Box
             sx={{
+              maxWidth:'400px',
               margin: '0 auto',
-              width: '400px',
               padding: '40px',
               display: 'flex',
               flexDirection: 'column',
@@ -65,7 +65,7 @@ const LoginForm = () => {
           >
             <MyTextField
               required
-              sx={{ width: '300px' }}
+              // sx={{ width:'none', maxWidth: '300px', boxSizing: 'inherit' }}
               id="outlined-basic"
               label="Email"
               variant="outlined"
@@ -74,7 +74,7 @@ const LoginForm = () => {
             />
             <MyTextField
               required
-              sx={{ width: '300px' }}
+              // sx={{ maxWidth: '300px' }}
               id="outlined-basic"
               label="Password"
               variant="outlined"

@@ -72,7 +72,7 @@ const Contact = ({ contact }) => {
         whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
         exit={{ opacity: 0 }}
       >
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', gap: {xs:'none', md:'20px'} }}>
           <ListItemAvatar sx={{ display: 'flex', alignItems: 'center' }}>
             <Avatar alt={contact.name} src={avatarUrl} />
           </ListItemAvatar>
@@ -95,7 +95,6 @@ const Contact = ({ contact }) => {
                   }}
                 >
                   <MyEdittingTextField
-                    sx={{ width: '200px' }}
                     variant="outlined"
                     id="outlined-basic"
                     label="Name"
@@ -103,7 +102,6 @@ const Contact = ({ contact }) => {
                     type="text"
                   />
                   <MyEdittingTextField
-                    sx={{ width: '150px' }}
                     variant="outlined"
                     id="outlined-basic"
                     label="Number"
