@@ -13,9 +13,12 @@ import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(fetchRefresh());
   }, [dispatch]);
+
+  
   return (
     <>
       <Routes>

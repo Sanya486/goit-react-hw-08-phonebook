@@ -13,12 +13,11 @@ import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import { NavLinkSt, LinkSt } from './AppBar.styled';
 
-
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogout } from 'redux/operations';
 import { selectIsLoggedIn, selectUserName } from 'redux/selectors';
 import { Button } from '@mui/material';
- 
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -26,7 +25,7 @@ function ResponsiveAppBar() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUserName);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -91,13 +90,11 @@ function ResponsiveAppBar() {
                   Home
                 </Button>
               </NavLinkSt>
-              {isLoggedIn && (
-                <NavLinkSt to="/contacts">
-                  <Button variant="contained" component="p">
-                    Contacts
-                  </Button>
-                </NavLinkSt>
-              )}
+              <NavLinkSt to="/contacts">
+                <Button variant="contained" component="p">
+                  Contacts
+                </Button>
+              </NavLinkSt>
             </Box>
           </Box>
 
@@ -184,7 +181,7 @@ function ResponsiveAppBar() {
             {!isLoggedIn && (
               <>
                 <NavLinkSt to="/registration">
-                  <Button variant="contained" component="span">
+                  <Button variant="contained" component="p">
                     Sign up
                   </Button>
                 </NavLinkSt>

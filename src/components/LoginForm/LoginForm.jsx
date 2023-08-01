@@ -1,34 +1,32 @@
 import { Formik, Form, useField } from 'formik';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import { Typography, Button, Box } from '@mui/material';
+import { Typography, Button, Box, TextField, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin } from 'redux/operations';
 import { selectAuthError } from 'redux/selectors';
 
- const MyTextField = ({ labelFormik, ...props }) => {
-   const [field, meta] = useField(props);
-   return (
-     <>
-       <label>
-         {labelFormik}
-         <TextField {...field} {...props} />
-       </label>
-       {meta.touched && meta.error ? (
-         <div className="error">{meta.error}</div>
-       ) : null}
-     </>
-   );
- };
+const MyTextField = ({ labelFormik, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <label>
+        {labelFormik}
+        <TextField {...field} {...props} />
+      </label>
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
 
 const LoginForm = () => {
-  const dispatch = useDispatch()
-  const handleSubmit = (values) => {
+  const dispatch = useDispatch();
+  const handleSubmit = values => {
     dispatch(fetchLogin(values));
-  }
+  };
 
-  const isError = useSelector(selectAuthError)
+  const isError = useSelector(selectAuthError);
   return (
     <Container>
       <Typography
@@ -66,7 +64,7 @@ const LoginForm = () => {
             }}
           >
             <MyTextField
-              autoComplete
+              required
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Email"
@@ -75,7 +73,7 @@ const LoginForm = () => {
               type="email"
             />
             <MyTextField
-              autoComplete
+              required
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Password"

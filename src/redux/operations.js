@@ -58,7 +58,7 @@ export const fetchRefresh = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState()
     if (!state.auth.token) {
-      return state
+      return thunkAPI.rejectWithValue()
     }
     setAuthorization(state.auth.token);
     try {

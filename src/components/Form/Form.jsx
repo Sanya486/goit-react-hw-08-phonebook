@@ -1,51 +1,12 @@
 import React from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/operations';
 import { selectContacts } from 'redux/selectors';
-import { Formik, Form, useField } from 'formik';
-import { Button, Box, TextField } from '@mui/material';
-import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { Button, Box } from '@mui/material';
 import { toast } from 'react-hot-toast';
-
-const MyTextField = ({ labelFormik, ...props }) => {
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <label>
-        {labelFormik}
-        <TextField
-          sx={{ width: '300px' }}
-          variant="outlined"
-          id="outlined-basic"
-          {...field}
-          {...props}
-        />
-      </label>
-      {meta.touched && meta.error ? (
-        <div
-          className="error"
-          style={{ fontSize: 'small', color: 'red', textAlign: 'center' }}
-        >
-          {meta.error}
-        </div>
-      ) : null}
-    </>
-  );
-};
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string().matches(
-    "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
-    {
-      message: `Names has to start with an alphabetical character (Latin or Cyrillic) and can contain spaces, hyphens, or single quotes. Names must not have leading or trailing spaces.`,
-    }
-  ),
-  number: Yup.string().matches('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$', {
-    message:
-      'Please write only phone numbers with optional international prefix, area code, and various separator characters.',
-  }),
-});
+import { MyTextField } from 'utils/MyTextField';
+import { SignupSchema } from 'utils/addContactValidation';
 
 const AddContactForm = () => {
   const dispatch = useDispatch();
@@ -57,7 +18,7 @@ const AddContactForm = () => {
     );
     if (!isContactExist) {
       dispatch(addContact({ name, number }));
-      return true
+      return true;
     } else {
       toast.error('Sorry, but this NAME has already exist!', {
         icon: '⚠️',
@@ -67,8 +28,8 @@ const AddContactForm = () => {
   };
 
   const submitHandler = ({ name, number }, actions) => {
-   const isContactAdded = addNewContact(name, number);
-  return isContactAdded ? actions.resetForm() : null;
+    const isContactAdded = addNewContact(name, number);
+    return isContactAdded ? actions.resetForm() : null;
   };
 
   return (
@@ -80,7 +41,6 @@ const AddContactForm = () => {
       validateOnChange={false}
       validationSchema={SignupSchema}
       onSubmit={submitHandler}
-      ha
     >
       <Form>
         <Box
@@ -96,8 +56,8 @@ const AddContactForm = () => {
             borderRadius: '22px 22px 22px 22px',
           }}
         >
-          <MyTextField label="Name" name="name" type="text" />
-          <MyTextField label="Number" name="number" type="text" />
+          <MyTextField label="Name" name="name" type="text" required />
+          <MyTextField label="Number" name="number" type="text" required />
           <Button
             sx={{ mt: '20px', mx: 'auto', display: 'block' }}
             variant="contained"

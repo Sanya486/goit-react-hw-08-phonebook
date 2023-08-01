@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContacts, selectFilter } from 'redux/selectors';
 import { fetchContacts } from 'redux/operations';
 import Contact from 'components/Contact/Contact';
+import { AnimatePresence } from 'framer-motion';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -23,9 +23,10 @@ const Contacts = () => {
 
   return (
     <>
-      {contacts.map(contact => (
+      <AnimatePresence>{contacts.map(contact => (
         <Contact key={contact.id} contact={contact} />
-      ))}
+      ))}</AnimatePresence>
+      
     </>
   );
 };

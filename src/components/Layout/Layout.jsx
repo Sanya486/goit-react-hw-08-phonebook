@@ -1,6 +1,6 @@
-import ResponsiveAppBar from 'components/AppBar/AppBar'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import ResponsiveAppBar from 'components/AppBar/AppBar'
 
 const Layout = () => {
   return (

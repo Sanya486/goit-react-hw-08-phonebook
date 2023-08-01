@@ -16,7 +16,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: { name: null, email: null },
-    token: null,
+    token: '',
     isLoading: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -45,6 +45,7 @@ export const authSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoading = false;
       state.isRefreshing = false;
+      state.token = '';
     },
     [fetchLogout.rejected]: handleRejected,
     [fetchRefresh.pending]: state => {

@@ -1,25 +1,9 @@
-import { Formik, Form, useField } from 'formik';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import { Typography, Button, Box } from '@mui/material';
+import { Formik, Form } from 'formik';
+import { Typography, Button, Box, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchSignup } from 'redux/operations';
-
- const MyTextField = ({ labelFormik, ...props }) => {
-   const [field, meta] = useField(props);
-   return (
-     <>
-       <label>
-         {labelFormik}
-         <TextField {...field} {...props} />
-       </label>
-       {meta.touched && meta.error ? (
-         <div className="error">{meta.error}</div>
-       ) : null}
-     </>
-   );
- };
+import { MyTextField } from 'utils/MyTextField';
 
 const SignupForm = () => {
   const dispatch = useDispatch() 
@@ -64,6 +48,7 @@ const SignupForm = () => {
             }}
           >
             <MyTextField
+              required
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Name"
@@ -72,6 +57,7 @@ const SignupForm = () => {
               type="text"
             />
             <MyTextField
+              required
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Email"
@@ -80,6 +66,7 @@ const SignupForm = () => {
               type="email"
             />
             <MyTextField
+              required
               sx={{ width: '300px' }}
               id="outlined-basic"
               label="Password"
