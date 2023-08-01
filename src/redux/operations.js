@@ -31,7 +31,7 @@ export const fetchLogin = createAsyncThunk(
     try {
       const response = await axios.post('/users/login', user);
       setAuthorization(response.data.token);
-      const userName = response.data.user.name
+      const userName = response.data.user.name;
       toast.success(`Welcome back, ${userName}`);
       return response.data;
     } catch (e) {
@@ -56,9 +56,9 @@ export const fetchLogout = createAsyncThunk(
 export const fetchRefresh = createAsyncThunk(
   'users/current',
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState()
+    const state = thunkAPI.getState();
     if (!state.auth.token) {
-      return thunkAPI.rejectWithValue()
+      return thunkAPI.rejectWithValue();
     }
     setAuthorization(state.auth.token);
     try {
@@ -74,17 +74,14 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-  
       const response = await axios.get('/contacts');
-      
+
       return response.data;
     } catch (e) {
-     
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
-
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
@@ -108,9 +105,12 @@ export const editContact = createAsyncThunk(
   'contacts/editContact',
   async (contact, thunkAPI) => {
     try {
-      const name = contact.name
-      const number = contact.number
-      const toastPromise = axios.patch(`/contacts/${contact.id}`, {name, number});
+      const name = contact.name;
+      const number = contact.number;
+      const toastPromise = axios.patch(`/contacts/${contact.id}`, {
+        name,
+        number,
+      });
       const response = await toastPromise;
       toast.promise(toastPromise, {
         loading: 'Loading',
@@ -122,7 +122,7 @@ export const editContact = createAsyncThunk(
       return thunkAPI.rejectWithValue(e.message);
     }
   }
-)
+);
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin } from 'redux/operations';
 import { selectAuthError } from 'redux/selectors';
+import { useEffect } from 'react';
+import { clearErrorOnUnmount } from 'redux/authSlice';
 
 const MyTextField = ({ labelFormik, ...props }) => {
   const [field, meta] = useField(props);
@@ -25,6 +27,10 @@ const LoginForm = () => {
   const handleSubmit = values => {
     dispatch(fetchLogin(values));
   };
+
+  useEffect(() => {
+    return ()=> dispatch(clearErrorOnUnmount());
+  }, [dispatch]);
 
   const isError = useSelector(selectAuthError);
   return (
@@ -65,7 +71,6 @@ const LoginForm = () => {
           >
             <MyTextField
               required
-              // sx={{ width:'none', maxWidth: '300px', boxSizing: 'inherit' }}
               id="outlined-basic"
               label="Email"
               variant="outlined"
@@ -74,7 +79,6 @@ const LoginForm = () => {
             />
             <MyTextField
               required
-              // sx={{ maxWidth: '300px' }}
               id="outlined-basic"
               label="Password"
               variant="outlined"

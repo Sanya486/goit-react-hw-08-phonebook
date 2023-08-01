@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchSignup, fetchLogin, fetchLogout, fetchRefresh } from './operations';
- 
+import {
+  fetchSignup,
+  fetchLogin,
+  fetchLogout,
+  fetchRefresh,
+} from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
-  state.error = null
 };
 
-const handleRejected = (state, action) => {
+const handleReject = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
-};
+}
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -20,6 +23,12 @@ export const authSlice = createSlice({
     isLoading: null,
     isLoggedIn: false,
     isRefreshing: false,
+    error: null,
+  },
+  reducers: {
+    clearErrorOnUnmount: state => {
+      state.error = null;
+    },
   },
   extraReducers: {
     [fetchSignup.pending]: handlePending,
@@ -30,7 +39,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isRefreshing = true;
     },
-    [fetchSignup.rejected]: handleRejected,
+    [fetchSignup.rejected]: handleReject,
     [fetchLogin.pending]: handlePending,
     [fetchLogin.fulfilled]: (state, action) => {
       state.token = action.payload.token;
@@ -39,7 +48,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isRefreshing = true;
     },
-    [fetchLogin.rejected]: handleRejected,
+    [fetchLogin.rejected]: handleReject,
     [fetchLogout.pending]: handlePending,
     [fetchLogout.fulfilled]: state => {
       state.isLoggedIn = false;
@@ -47,7 +56,7 @@ export const authSlice = createSlice({
       state.isRefreshing = false;
       state.token = '';
     },
-    [fetchLogout.rejected]: handleRejected,
+    [fetchLogout.rejected]: handleReject,
     [fetchRefresh.pending]: state => {
       state.isLoading = true;
       state.isRefreshing = true;
@@ -61,6 +70,9 @@ export const authSlice = createSlice({
     [fetchRefresh.rejected]: (state, action) => {
       state.isLoading = false;
       state.isRefreshing = false;
+      state.error = action.payload;
     },
   },
 });
+
+export const {clearErrorOnUnmount} = authSlice.actions

@@ -1,16 +1,22 @@
 import { Formik, Form } from 'formik';
 import { Typography, Button, Box, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSignup } from 'redux/operations';
 import { MyTextField } from 'utils/MyTextField';
+import { selectAuthError } from 'redux/selectors';
+import { useEffect } from 'react';
+import { clearErrorOnUnmount } from 'redux/authSlice';
 
 const SignupForm = () => {
   const dispatch = useDispatch() 
   const handleSubmit = (values) => {
-    dispatch(fetchSignup(values));
-  
+    dispatch(fetchSignup(values))
   }
+  useEffect(() => {
+    return ()=> dispatch(clearErrorOnUnmount());
+  }, [dispatch]);
+  const isError = useSelector(selectAuthError);
   return (
     <Container>
       <Typography
@@ -71,6 +77,12 @@ const SignupForm = () => {
               name="password"
               type="password"
             />
+            {isError && (
+              <Typography color="red">
+                The user with this email address is already registered. Try to
+                login
+              </Typography>
+            )}
             <Button
               sx={{ mt: '20px', mx: 'auto', display: 'block' }}
               variant="contained"
