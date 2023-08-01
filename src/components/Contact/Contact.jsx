@@ -22,6 +22,7 @@ import { selectContacts } from 'redux/selectors';
 import { Form, Formik } from 'formik';
 import { SignupSchema } from 'utils/addContactValidation';
 import { MyEdittingTextField } from 'utils/MyTextField';
+import { toast } from 'react-hot-toast';
 
 const Contact = ({ contact }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -46,9 +47,15 @@ const Contact = ({ contact }) => {
     const isContactNotChanged = contactsRedux.some(
       item => item.name === name && item.number === number
     );
+    const isContactExist = contactsRedux.some(
+      contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase())
     if (isContactNotChanged) {
       setIsEditing(false);
       return;
+    }
+    if (isContactExist) {
+      toast.error(`${name} already exists`);
+      return
     }
     dispatch(editContact({ id: contact.id, name, number }));
     setIsEditing(false);
