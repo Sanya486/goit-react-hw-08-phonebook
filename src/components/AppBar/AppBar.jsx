@@ -74,7 +74,7 @@ function ResponsiveAppBar() {
                     textDecoration: 'none',
                   }}
                 >
-                  PhoneMania
+                  ContactFlow
                 </Typography>
               </Box>
             </LinkSt>
@@ -141,45 +141,51 @@ function ResponsiveAppBar() {
                   </Button>
                 </NavLinkSt>
               </MenuItem>
-              {!isLoggedIn && <MenuItem key="SignUp" onClick={handleCloseNavMenu}>
-                <NavLinkSt style={{ color: '#1976d2' }} to="/contacts">
-                  <Button variant="outlined" component="span">
-                    Sign up
-                  </Button>
-                </NavLinkSt>
-              </MenuItem>}
-              {!isLoggedIn &&<MenuItem key="LogIn" onClick={handleCloseNavMenu}>
-                <NavLinkSt style={{ color: '#1976d2' }} to="/contacts">
-                  <Button variant="outlined" component="span">
-                    Log in
-                  </Button>
-                </NavLinkSt>
-              </MenuItem>}
+              {!isLoggedIn && (
+                <MenuItem key="SignUp" onClick={handleCloseNavMenu}>
+                  <NavLinkSt style={{ color: '#1976d2' }} to="/contacts">
+                    <Button variant="outlined" component="span">
+                      Sign up
+                    </Button>
+                  </NavLinkSt>
+                </MenuItem>
+              )}
+              {!isLoggedIn && (
+                <MenuItem key="LogIn" onClick={handleCloseNavMenu}>
+                  <NavLinkSt style={{ color: '#1976d2' }} to="/contacts">
+                    <Button variant="outlined" component="span">
+                      Log in
+                    </Button>
+                  </NavLinkSt>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
-          {!isLoggedIn && <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <ContactPhoneIcon
-              sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
-            />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
+          {!isLoggedIn && (
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <ContactPhoneIcon
+                sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+              />
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                href=""
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', md: 'none' },
 
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.1rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              PhoneMania
-            </Typography>
-          </Box>}
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.1rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                ContactFlow
+              </Typography>
+            </Box>
+          )}
           <Box
             sx={{
               display: { xs: 'none', md: 'flex' },
@@ -216,7 +222,13 @@ function ResponsiveAppBar() {
           {isLoggedIn && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings" arrow onClick={handleOpenUserMenu}>
-                <Box sx={{ display: {xs:'flex', md:'flex'}, alignItems: 'center', gap: '5px' }}>
+                <Box
+                  sx={{
+                    display: { xs: 'flex', md: 'flex' },
+                    alignItems: 'center',
+                    gap: '5px',
+                  }}
+                >
                   <Typography textAlign="center">Hello, {user}</Typography>
                   <IconButton sx={{ p: 0 }}>
                     <InsertEmoticonIcon sx={{ fontSize: 30 }} />

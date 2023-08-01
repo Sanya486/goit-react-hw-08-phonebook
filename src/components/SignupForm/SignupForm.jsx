@@ -19,7 +19,7 @@ const SignupForm = () => {
         align="center"
         color="#1976d2"
       >
-        Register to Phonemania
+        Register to ContactFlow
       </Typography>
       <Typography align="center" variant="p" display="block" mb="20px">
         Already have an account? <Link to="/login">Log in here</Link>

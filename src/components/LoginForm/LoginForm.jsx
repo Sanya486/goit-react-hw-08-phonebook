@@ -38,7 +38,7 @@ const LoginForm = () => {
         Login
       </Typography>
       <Typography align="center" variant="p" display="block" mb="20px">
-        New to Phonemania?{' '}
+        New to ContactFlow?{' '}
         <Link to="/registration">Register for a free account.</Link>
       </Typography>
       <Formik
@@ -51,7 +51,7 @@ const LoginForm = () => {
         <Form>
           <Box
             sx={{
-              maxWidth:'400px',
+              maxWidth: '400px',
               margin: '0 auto',
               padding: '40px',
               display: 'flex',

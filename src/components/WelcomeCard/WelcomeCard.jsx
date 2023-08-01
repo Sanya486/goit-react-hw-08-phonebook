@@ -27,7 +27,7 @@ const WelcomeCard = () => {
             }}
           >
             <Title variant="h4" align="center" color={'#1976d2'}>
-              Hello! Welcome to PhoneMania
+              Hello! Welcome to ContactFlow
             </Title>
 
             <Box
@@ -68,13 +68,13 @@ const WelcomeCard = () => {
                   >
                     My name is Robo, and I like to introduce my home. I have
                     lived here from the very beginning. I even remember all
-                    howls of my parents - developers of the PhoneMania, while
+                    howls of my parents - developers of the ContactFlow, while
                     they were developing my home and me.
                   </ListText>
                 </ListItemSt>
                 <ListItemSt>
                   <ListText component="p" color={'#1976d2'}>
-                    PhoneMania's primary purpose is to give people an
+                    ContactFlow's primary purpose is to give people an
                     opportunity to store, add, delete, and edit contact
                     information.
                   </ListText>
@@ -95,7 +95,8 @@ const WelcomeCard = () => {
                     color={'#1976d2'}
                     textAlign={'justify'}
                   >
-                    If you visit PhoneMania for the first time don`t hesitate to{' '}
+                    If you visit ContactFlow for the first time don`t hesitate
+                    to{' '}
                     <Link to="/registration">
                       <ListButton variant="contained" component="span">
                         Sign UP
