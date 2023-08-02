@@ -54,7 +54,9 @@ const Contact = ({ contact }) => {
       return;
     }
     if (isContactExist) {
-      toast.error(`${name} already exists`);
+      toast.error(`Sorry, but this NAME has already exist!`, {
+        icon:'⚠️',
+      });
       return
     }
     dispatch(editContact({ id: contact.id, name, number }));
@@ -79,7 +81,7 @@ const Contact = ({ contact }) => {
         whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
         exit={{ opacity: 0 }}
       >
-        <Box sx={{ display: 'flex', gap: {xs:'none', md:'20px'} }}>
+        <Box sx={{ display: 'flex', gap: { xs: 'none', md: '20px' } }}>
           <ListItemAvatar sx={{ display: 'flex', alignItems: 'center' }}>
             <Avatar alt={contact.name} src={avatarUrl} />
           </ListItemAvatar>
@@ -102,6 +104,7 @@ const Contact = ({ contact }) => {
                   }}
                 >
                   <MyEdittingTextField
+                    required
                     variant="outlined"
                     id="outlined-basic"
                     label="Name"
@@ -109,6 +112,7 @@ const Contact = ({ contact }) => {
                     type="text"
                   />
                   <MyEdittingTextField
+                    required
                     variant="outlined"
                     id="outlined-basic"
                     label="Number"

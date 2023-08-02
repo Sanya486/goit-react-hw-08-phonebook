@@ -20,7 +20,7 @@ const AddContactForm = () => {
       dispatch(addContact({ name, number }));
       return true;
     } else {
-      toast.error('Sorry, but this NAME has already exist!', {
+      toast.error(`Sorry, but this NAME has already exist!`, {
         icon: '⚠️',
       });
       return false;
